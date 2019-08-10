@@ -1,0 +1,38 @@
+module DMux32(in, sel, out);
+    input in;
+    input [4:0] sel;
+    output [31:0] out;
+
+    assign out[0] = (sel == 0) ? in : 0;
+    assign out[1] = (sel == 1) ? in : 0;
+    assign out[2] = (sel == 2) ? in : 0;
+    assign out[3] = (sel == 3) ? in : 0;
+    assign out[4] = (sel == 4) ? in : 0;
+    assign out[5] = (sel == 5) ? in : 0;
+    assign out[6] = (sel == 6) ? in : 0;
+    assign out[7] = (sel == 7) ? in : 0;
+    assign out[8] = (sel == 8) ? in : 0;
+    assign out[9] = (sel == 9) ? in : 0;
+    assign out[10] = (sel == 10) ? in : 0;
+    assign out[11] = (sel == 11) ? in : 0;
+    assign out[12] = (sel == 12) ? in : 0;
+    assign out[13] = (sel == 13) ? in : 0;
+    assign out[14] = (sel == 14) ? in : 0;
+    assign out[15] = (sel == 15) ? in : 0;
+    assign out[16] = (sel == 16) ? in : 0;
+    assign out[17] = (sel == 17) ? in : 0;
+    assign out[18] = (sel == 18) ? in : 0;
+    assign out[19] = (sel == 19) ? in : 0;
+    assign out[20] = (sel == 20) ? in : 0;
+    assign out[21] = (sel == 21) ? in : 0;
+    assign out[22] = (sel == 22) ? in : 0;
+    assign out[23] = (sel == 23) ? in : 0;
+    assign out[24] = (sel == 24) ? in : 0;
+    assign out[25] = (sel == 25) ? in : 0;
+    assign out[26] = (sel == 26) ? in : 0;
+    assign out[27] = (sel == 27) ? in : 0;
+    assign out[28] = (sel == 28) ? in : 0;
+    assign out[29] = (sel == 29) ? in : 0;
+    assign out[30] = (sel == 30) ? in : 0;
+    assign out[31] = (sel == 31) ? in : 0;
+endmodule
