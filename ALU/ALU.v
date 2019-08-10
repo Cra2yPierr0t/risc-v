@@ -3,7 +3,7 @@ module ALU(x, y, ctrl, out);
     input [2:0] ctrl;
     output [31:0] out;
 
-    assign out = calculate(x, y, ctrl);
+    assign out = calculate(ctrl);
 
     function [31:0] calculate(input [2:0] ctrl);
         begin
@@ -11,7 +11,7 @@ module ALU(x, y, ctrl, out);
             3'b000:     calculate = x + y;
             3'b001:     calculate = x << y;
             3'b010:     calculate = (x < y);
-            3'b011:     
+            3'b011:     calculate = ($signed(x) < $signed(y));
             3'b100:     calculate = x ^ y;
             3'b101:     calculate = x >> y;
             3'b110:     calculate = x | y;
@@ -20,3 +20,4 @@ module ALU(x, y, ctrl, out);
             endcase
         end
     endfunction
+endmodule
