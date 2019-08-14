@@ -6,11 +6,10 @@ module CPU(instruction, pc, alu_out, ram_out, mem_load, r2_out_change, reset, cl
 
     wire [31:0] r1_out, Extended_data, alu_out, ram_out_change, wd3, r2_out, SrcB, sign_out;
     wire [11:0] sign_in;
-    wire [6:0] op;
     wire [2:0] ctrl;
     wire Regwswitch, Reg_load, do_store, ALU_Src, cal, mem_load;
 
-    controller controller(op, Regwswitch, Reg_load, do_store, ALU_Src, cal, mem_load);
+    controller controller(instruction[6:0], Regwswitch, Reg_load, do_store, ALU_Src, cal, mem_load);
 
     PC PC(32'h00000000, 1'b0, pc, reset, clock);
 
