@@ -16,7 +16,7 @@ module controller(op, Regwswitch, Reg_load, do_store, ALUSrc, cal, mem_load, jum
         7'b0110011: decode = 8'b00100101;
         7'b1101111: decode = 8'b00010110;
         7'b1100111: decode = 8'b00010111;
-        default:    decode = 8'bxxxxxxxx;
+        default:    decode = 8'b00000000;
         endcase
     end
     endfunction
