@@ -6,5 +6,5 @@ module Computer(reset, clock);
 
     CPU CPU(instruction, pc, ram_addr, ram_out, mem_load, ram_data, reset, clock);
     ROM ROM(pc, instruction);
-    RAM(ram_data, ram_addr, mem_load, ram_out, clock);
+    RAM RAM(ram_data, ram_addr, mem_load, ram_out, clock);
 endmodule
