@@ -11,7 +11,7 @@ module CPU(instruction, pc_out, alu_out, ram_out, mem_load, r2_out_change, reset
 
     controller controller(instruction[6:0], Regwswitch, Reg_load, do_store, ALU_Src, cal, mem_load, jump, addorjump);
 
-    PC PC(pc_in, jump, pc_out, reset, clock);
+    PC PC(pc_in, pc_out, reset, clock);
     assign pc4plus = pc_out + 4;
     assign pc_in = jump ? alu_out : pc4plus;
 

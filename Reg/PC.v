@@ -1,6 +1,6 @@
-module PC(in, load, out, reset, clock);
+module PC(in, out, reset, clock);
     input [31:0] in;
-    input load, reset, clock;
+    input reset, clock;
     output [31:0] out;
 
     reg [31:0] out;
@@ -8,10 +8,8 @@ module PC(in, load, out, reset, clock);
     always @(posedge clock, posedge reset) begin
         if(reset) begin
             out <= 32'h00000000;
-        end else if(load) begin
-            out <= in;
         end else begin
-            out <= out + 32'h00000004;
+            out <= in;
         end
     end
 endmodule
