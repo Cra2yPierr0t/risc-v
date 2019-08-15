@@ -4,7 +4,7 @@ module CPU(instruction, pc_out, alu_out, ram_out, mem_load, r2_out_change, reset
     output [31:0] pc_out, alu_out, r2_out_change;
     output mem_load;
 
-    wire [31:0] r1_out, SrcA, Extended_data, alu_out, ram_out_change, wd3, r2_out, SrcB, sign_out, jaljalrimm, jal_imm, jalr_imm, uoo;
+    wire [31:0] r1_out, SrcA, Extended_data, alu_out, ram_out_change, wd3, r2_out, SrcB, sign_out, jaljalrimm, jal_imm, jalr_imm, uoo, pc_in, pc_out, pc4plus;
     wire [11:0] sign_in;
     wire [2:0] ctrl;
     wire Regwswitch, Reg_load, do_store, ALU_Src, cal, mem_load, jump, addorjump;
@@ -35,7 +35,7 @@ module CPU(instruction, pc_out, alu_out, ram_out, mem_load, r2_out_change, reset
     assign jaljalrimm = addorjump ? jalr_imm : jal_imm;
     
     assign SrcB = jump ? jaljalrimm : uoo;
-    assign SrcA = addorjump ? rd1_out : pc_out;
+    assign SrcA = addorjump ? r1_out : pc_out;
     ALU ALU(SrcA, SrcB, ctrl, alu_out);
 endmodule
 
