@@ -3,18 +3,18 @@ module branchcontroller(in, ctrl, out);
 	input [2:0] ctrl;
 	output out;
 
-	assign out = controller(ctrl);
+	assign out = controller(in, ctrl);
 
-	function controller(input [2:0] ctrl);
+	function controller(input [31:0] in, input [2:0] ctrl);
 		begin
 			case(ctrl)
-			3'b000: ~|in;
-			3'b001:	|in;
-			3'b100:	in[0];
-			3'b101: ~in[0];
-			3'b110: in[0];
-			3'b111: ~in[0];
-			default:
+			3'b000: controller = ~|in;
+			3'b001:	controller = |in;
+			3'b100:	controller = in[0];
+			3'b101: controller = ~in[0];
+			3'b110: controller = in[0];
+			3'b111: controller = ~in[0];
+			default: controller = 1'b0;
 			endcase
 		end
 	endfunction

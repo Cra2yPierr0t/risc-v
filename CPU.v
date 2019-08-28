@@ -4,19 +4,21 @@ module CPU(instruction, pc_out, alu_out, ram_out, mem_load, r2_out_change, reset
     output [31:0] pc_out, alu_out, r2_out_change;
     output mem_load;
 
-    wire [31:0] r1_out, SrcA, Extended_data, alu_out, ram_out_change, wd3, r2_out, SrcB, sign_out, jaljalrimm, jal_imm, jalr_imm, uoo, pc_in, pc_out, pc4plus, pc_in_pre, bnc_jump;
+    wire [31:0] r1_out, SrcA, Extended_data, alu_out, ram_out_change, wd3, wd3pre, r2_out, SrcB, sign_out, jaljalrimm, jal_imm, jalr_imm, uoo, pc_in, pc_out, pc4plus, pc_in_pre, bnc_jump, bnc_jump_pre;
     wire [11:0] sign_in;
     wire [2:0] ctrl, bnc_sign, ctrl_pre;
     wire Regwswitch, Reg_load, do_store, ALU_Src, cal, mem_load, jump, addorjump, sltorsub, ex, ALUbnc;
-    wire bnc_ctrl;
+    wire bnc_ctrl, bnc_ctrl_pre;
 
-    controller controller(instruction[6:0], Regwswitch, Reg_load, do_store, ALU_Src, cal, mem_load, jump, addorjump, sltorsub, ex, ALUbnc);
+    controller controller(instruction[6:0], instruction[14:12], Regwswitch, Reg_load, do_store, ALU_Src, cal, mem_load, jump, addorjump, sltorsub, ex, ALUbnc);
 
     PC PC(pc_in, pc_out, reset, clock);
     assign pc4plus = pc_out + 4;
     assign pc_in_pre = jump ? alu_out : pc4plus;
-    SignExtender_bnc SignExtender_bnc({instruction[31:25], instruction[11:7]} ,bnc_jump);
-    branchcontroller branchcontroller(alu_out, instruction[14:12], bnc_ctrl);
+    SignExtender_bnc SignExtender_bnc({instruction[31:25], instruction[11:7]} ,bnc_jump_pre);
+    branchcontroller branchcontroller(alu_out, instruction[14:12], bnc_ctrl_pre);
+    assign bnc_jump = bnc_jump_pre + pc_out;
+    assign bnc_ctrl = ALUbnc ? bnc_ctrl_pre : 1'b0;
     assign pc_in = bnc_ctrl ? bnc_jump : pc_in_pre; 
 
     assign wd3pre = Regwswitch ? ram_out_change : alu_out;
