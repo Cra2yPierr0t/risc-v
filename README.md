@@ -9,7 +9,7 @@ P1err0t-V
 はずだった, 実際は...
 
 ## Usage
-1./Mem/ROM.vのmem[]にRISC-Vバイナリを直書きする
+### 1./Mem/ROM.vのmem[]にRISC-Vバイナリを直書きする
 ```
     initial begin
         for(i = 0; i < 64; i = i + 1)
@@ -19,7 +19,7 @@ P1err0t-V
         mem[4] = 32'b00000000000000000000000100010111;
     end
 ```
-2.Icarus Verilogを使っている場合以下のコマンドでコンパイル, 実行が可能
+### 2.Icarus Verilogを使っている場合, 以下のコマンドでコンパイル, 実行が可能
 
 コンパイル
 ```
