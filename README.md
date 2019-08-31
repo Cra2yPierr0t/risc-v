@@ -29,7 +29,7 @@ $ iverilog -o RISC-V_SIM -s Simulation Simulation.v Computer.v CPU.v DMux32.v Lo
 $ vvp RISC-V_SIM
 ```
 
-波形を見たい場合は実行時生成されるwave.vcdをgtkwaveで見れる
+波形を見たい場合、実行時生成されるwave.vcdをgtkwaveで見れる
 ```
 $ gtkwave wave.vcd
 ```
