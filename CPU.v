@@ -10,7 +10,7 @@ module CPU(instruction, pc_out, alu_out, ram_out, mem_load, r2_out_change, reset
     wire Regwswitch, Reg_load, do_store, ALU_Src, cal, mem_load, jump, addorjump, sltorsub, ex, ALUbnc;
     wire bnc_ctrl, bnc_ctrl_pre;
 
-    controller controller(instruction[6:0], instruction[14:12], Regwswitch, Reg_load, do_store, ALU_Src, cal, mem_load, jump, addorjump, sltorsub, ex, ALUbnc);
+    controller controller(instruction[6:0], instruction[14:12], instruction[31:25], Regwswitch, Reg_load, do_store, ALU_Src, cal, mem_load, jump, addorjump, sltorsub, ex, ALUbnc);
 
     PC PC(pc_in, pc_out, reset, clock);
     assign pc4plus = pc_out + 4;
@@ -22,7 +22,7 @@ module CPU(instruction, pc_out, alu_out, ram_out, mem_load, r2_out_change, reset
     assign pc_in = bnc_ctrl ? bnc_jump : pc_in_pre; 
 
     assign wd3pre = Regwswitch ? ram_out_change : alu_out;
-    assign sign_in = do_store ? { instruction[31:25], instruction[11:7] } : ((instruction[14:12] == 3'b001) || (instruction[14:12] == 3'b101) ? {7'b0000000, instruction[24:20]} : instruction[31:20];
+    assign sign_in = do_store ? { instruction[31:25], instruction[11:7] } : ((instruction[14:12] == 3'b001) || (instruction[14:12] == 3'b101)) ? {7'b0000000, instruction[24:20]} : instruction[31:20];
 
     SignExtender SignExtender_0(sign_in, sign_out);
 

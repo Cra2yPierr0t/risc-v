@@ -7,7 +7,7 @@ module controller(op, funct3, funct7, Regwswitch, Reg_load, do_store, ALUSrc, ca
     wire [10:0] controls;
 
     assign {Regwswitch, do_store, ALUSrc, cal, mem_load, Reg_load, jump, addorjump, sltorsub, ex, ALUbnc} = controls;
-    assign controls = decode(op, funct3);
+    assign controls = decode(op, funct3, funct7);
 
     function [10:0] decode(input [6:0] op, input [2:0] funct3, input [6:0] funct7);
     begin
@@ -17,6 +17,7 @@ module controller(op, funct3, funct7, Regwswitch, Reg_load, do_store, ALUSrc, ca
         7'b0010011: case(funct7)
                     7'b0100000: decode = 11'b00000101010;
                     default:    decode = 11'b00000101000;
+                    endcase
         7'b0110011: decode = ((funct7 == 7'b0100000) && (funct3 == 3'b101)) ? 11'b00100101010 : 11'b00100101000;
         7'b1101111: decode = 11'b00010110000;
         7'b1100111: decode = 11'b00010111000;
