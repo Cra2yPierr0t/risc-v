@@ -22,7 +22,7 @@ module CPU(instruction, pc_out, alu_out, ram_out, mem_load, r2_out_change, reset
     assign pc_in = bnc_ctrl ? bnc_jump : pc_in_pre; 
 
     assign wd3pre = Regwswitch ? ram_out_change : alu_out;
-    assign sign_in = do_store ? { instruction[31:25], instruction[11:7] } : instruction[31:20];
+    assign sign_in = do_store ? { instruction[31:25], instruction[11:7] } : ((instruction[14:12] == 3'b001) || (instruction[14:12] == 3'b101) ? {7'b0000000, instruction[24:20]} : instruction[31:20];
 
     SignExtender SignExtender_0(sign_in, sign_out);
 
