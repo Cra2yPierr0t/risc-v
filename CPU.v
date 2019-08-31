@@ -4,13 +4,13 @@ module CPU(instruction, pc_out, alu_out, ram_out, mem_load, r2_out_change, reset
     output [31:0] pc_out, alu_out, r2_out_change;
     output mem_load;
 
-    wire [31:0] r1_out, SrcA, Extended_data, alu_out, ram_out_change, wd3, wd3pre, r2_out, SrcB, sign_out, jaljalrimm, jal_imm, jalr_imm, uoo, pc_in, pc_out, pc4plus, pc_in_pre, bnc_jump, bnc_jump_pre;
+    wire [31:0] r1_out, SrcA, Extended_data, alu_out, ram_out_change, wd3, wd3pre, wd3prepre, r2_out, SrcB, SrcBpre, sign_out, jaljalrimm, jal_imm, jalr_imm, uoo, pc_in, pc_out, pc4plus, pc_in_pre, bnc_jump, bnc_jump_pre;
     wire [11:0] sign_in;
     wire [2:0] ctrl, bnc_sign, ctrl_pre;
-    wire Regwswitch, Reg_load, do_store, ALU_Src, cal, mem_load, jump, addorjump, sltorsub, ex, ALUbnc;
+    wire Regwswitch, Reg_load, do_store, ALU_Src, cal, mem_load, jump, addorjump, sltorsub, ex, ALUbnc, lui_ctrl, auipc_ctrl;
     wire bnc_ctrl, bnc_ctrl_pre;
 
-    controller controller(instruction[6:0], instruction[14:12], instruction[31:25], Regwswitch, Reg_load, do_store, ALU_Src, cal, mem_load, jump, addorjump, sltorsub, ex, ALUbnc);
+    controller controller(instruction[6:0], instruction[14:12], instruction[31:25], Regwswitch, Reg_load, do_store, ALU_Src, cal, mem_load, jump, addorjump, sltorsub, ex, ALUbnc, lui_ctrl, auipc_ctrl);
 
     PC PC(pc_in, pc_out, reset, clock);
     assign pc4plus = pc_out + 4;
@@ -26,7 +26,8 @@ module CPU(instruction, pc_out, alu_out, ram_out, mem_load, r2_out_change, reset
 
     SignExtender SignExtender_0(sign_in, sign_out);
 
-    assign wd3 = jump ? pc4plus : wd3pre;
+    assign wd3prepre = jump ? pc4plus : wd3pre;
+    assign wd3 = lui_ctrl ? {instruction[31:12], 12'b000000000000} : wd3prepre;
     Regfile Regfile(instruction[11:7], Reg_load, wd3, instruction[19:15], instruction[24:20], r1_out, r2_out, reset, clock); 
 
     Store_Length_Changer Store_Length_Changer(r2_out, instruction[14:12], r2_out_change);
@@ -42,7 +43,8 @@ module CPU(instruction, pc_out, alu_out, ram_out, mem_load, r2_out_change, reset
     
     assign jaljalrimm = addorjump ? jalr_imm : jal_imm;
     
-    assign SrcB = jump ? jaljalrimm : uoo;
+    assign SrcBpre = jump ? jaljalrimm : uoo;
+    assign SrcB = auipc_ctrl ? {instruction[31:12], 12'b000000000000} : SrcBpre;
     assign SrcA = addorjump ? r1_out : pc_out;
     ALU ALU(SrcA, SrcB, ctrl, ex, alu_out);
 endmodule
