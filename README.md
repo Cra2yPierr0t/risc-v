@@ -3,7 +3,7 @@ P1err0t-V
 無計画に作ったRISC-Vコア. RV32IのFENCE, ECALL, EBREAK以外全ての命令が動作する. 高速化は何もしていないため, 安心と信頼の単一サイクルとなっております.
 
 ## Description
-![DSC_1045](https://user-images.githubusercontent.com/48832611/64066182-bbff5180-cc51-11e9-9a82-ab5bb963a5f2.JPG)
+![CPU_fin](https://user-images.githubusercontent.com/48832611/64076129-b3635580-ccfb-11e9-8b39-44b957e594fe.png)
 この画像の様にモジュールを組み合わせて作ったので分かりやすい実装になるはずだった, 実際は...
 
 ## Usage
