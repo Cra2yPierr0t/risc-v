@@ -19,7 +19,8 @@ module Simulation();
     end
 
     initial begin
-        #2
+        reset = 1'b1;
+        #1
         reset = 1'b0;
         #500
         $finish;
