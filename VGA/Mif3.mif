@@ -1,0 +1,83 @@
+-- Copyright (C) 2018  Intel Corporation. All rights reserved.
+-- Your use of Intel Corporation's design tools, logic functions 
+-- and other software and tools, and its AMPP partner logic 
+-- functions, and any output files from any of the foregoing 
+-- (including device programming or simulation files), and any 
+-- associated documentation or information are expressly subject 
+-- to the terms and conditions of the Intel Program License 
+-- Subscription Agreement, the Intel Quartus Prime License Agreement,
+-- the Intel FPGA IP License Agreement, or other applicable license
+-- agreement, including, without limitation, that your use is for
+-- the sole purpose of programming logic devices manufactured by
+-- Intel and sold by Intel or its authorized distributors.  Please
+-- refer to the applicable agreement for further details.
+
+-- Quartus Prime generated Memory Initialization File (.mif)
+
+WIDTH=32;
+DEPTH=16384;
+
+ADDRESS_RADIX=UNS;
+DATA_RADIX=HEX;
+
+CONTENT BEGIN
+	[0..19]  :   00000000;
+	20     :   3FE00000;
+	[21..39]  :   00000000;
+	40     :   01E00000;
+	[41..59]  :   00000000;
+	60     :   00E00000;
+	[61..79]  :   00000000;
+	80     :   00E00000;
+	[81..99]  :   00000000;
+	100    :   03E00000;
+	[101..119]  :   00000000;
+	120    :   07C00000;
+	[121..139]  :   00000000;
+	140    :   06000000;
+	[141..159]  :   00000000;
+	160    :   06000000;
+	[161..179]  :   00000000;
+	180    :   06000000;
+	[181..199]  :   00000000;
+	200    :   06000000;
+	[201..219]  :   00000000;
+	220    :   06000000;
+	[221..239]  :   00000000;
+	240    :   06000000;
+	[241..259]  :   00000000;
+	260    :   06000000;
+	[261..279]  :   00000000;
+	280    :   06000000;
+	[281..299]  :   00000000;
+	300    :   06000000;
+	[301..319]  :   00000000;
+	320    :   06000000;
+	[321..339]  :   00000000;
+	340    :   07F80000;
+	[341..359]  :   00000000;
+	360    :   06180000;
+	[361..379]  :   00000000;
+	380    :   063C0000;
+	[381..399]  :   00000000;
+	400    :   067E0000;
+	[401..419]  :   00000000;
+	420    :   06000000;
+	[421..439]  :   00000000;
+	440    :   06000000;
+	[441..459]  :   00000000;
+    460    :   06000000;
+	[461..479]  :   00000000;
+	480    :   06000000;
+	[481..499]  :   00000000;
+	500    :   06000000;
+	[501..519]  :   00000000;
+	520    :   06000000;
+	[521..539]  :   00000000;
+	540    :   0F000000;
+	[541..559]  :   00000000;
+	560    :   1FC00000;
+	[561..579]  :   00000000;
+	580    :   7FF00000;
+	[581..16383]  :   00000000;
+END;
