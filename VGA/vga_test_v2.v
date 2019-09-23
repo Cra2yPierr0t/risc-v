@@ -164,12 +164,12 @@ begin
 				wraddr = wraddr - 619;
 			end
 		  wflag_2 = 1;
-        wren <= 1;
+        wren = 1;
         data = {16'b0000000000000000, vram[vram_index]};
         wraddr = wraddr + 20;
-        wren <= 0;
         vram_index <= vram_index + 1;
-    end
+    end else begin
+        wren = 1;
 end
 
 
