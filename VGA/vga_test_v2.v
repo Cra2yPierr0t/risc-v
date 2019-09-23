@@ -51,6 +51,7 @@ reg wflag = 0;
 reg wflag_2 = 0;
 reg wren = 0;
 wire buffer;
+wire BUTTON;
 //------------------------------------------------
 
 assign	reset	=	~RESETn;	// ボタン0押すとリセット
@@ -155,21 +156,23 @@ end
 assign BUTTON = ~button;
 assign buffer = ~button;
 
-always @(posedge clk25m or posedge BUTTON)
+always @(posedge clk25m)
 begin
 		wflag = buffer;
     if((wflag == 1) || (wflag_2 == 1)) begin
 			if(vram_index == 5'b11111) begin
 				wflag_2 = 0;
 				wraddr = wraddr - 619;
+			end else begin
+				wflag_2 = 1;
+				wraddr = wraddr + 20;
 			end
-		  wflag_2 = 1;
         wren = 1;
         data = {16'b0000000000000000, vram[vram_index]};
-        wraddr = wraddr + 20;
-        vram_index <= vram_index + 1;
+        vram_index = vram_index + 1;
     end else begin
-        wren = 1;
+        wren = 0;
+	end
 end
 
 
